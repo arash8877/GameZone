@@ -1,27 +1,30 @@
 import { useState } from "react";
 
-const ListGroup = () => {
-  const [selectedIndex, setSelectedIndex] = useState(-1);
+interface ListGroupProps {
+  items: string[];
+  heading?: string;
+}
 
-  const items = ["New York", "San Francisco", "Tokyo", "London", "Paris"];
- 
+const ListGroup = ({ items, heading }: ListGroupProps) => {
+  const [selectedIndex, setSelectedIndex] = useState(-1);
 
   return (
     <>
-      <h1>List</h1>
-    <ul className="list-group">
+      <h1>{heading}</h1>
+      {items.length === 0 && <p>No items found</p>}
+      <ul className="list-group">
         {items.map((item, index) => {
-            return (
-                <li
-                    key={index}
-                    className={selectedIndex === index ? "list-group-item active" : "list-group-item"}
-                    onClick={() => setSelectedIndex(index)}
-                >
-                    {item}
-                </li>
-            );
+          return (
+            <li
+              key={index}
+              className={selectedIndex === index ? "list-group-item active" : "list-group-item"}
+              onClick={() => setSelectedIndex(index)}
+            >
+              {item}
+            </li>
+          );
         })}
-    </ul>
+      </ul>
     </>
   );
 };
