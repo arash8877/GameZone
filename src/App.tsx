@@ -6,7 +6,6 @@ import "./App.css";
 import Navbar from "./components/Navbar";
 import Cart from "./components/Cart";
 
-
 //---------------------- App Component ----------------------
 function App() {
   // const [alertVisible, setAlertVisible] = useState(false);
@@ -15,7 +14,7 @@ function App() {
   return (
     <div>
       <Navbar cartItemsCount={cartItems.length} />
-      <Cart cartItems={cartItems} />
+      <Cart cartItems={cartItems} onClear={() => setCartItems([])} />
     </div>
   );
 }
