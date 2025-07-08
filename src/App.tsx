@@ -1,6 +1,7 @@
 import React from "react";
 import { Grid, GridItem } from "@chakra-ui/react";
 import Navbar from "./components/Navbar";
+import GameGrid from "./components/GameGrid";
 
 export default function DashboardLayout() {
   return (
@@ -17,8 +18,8 @@ export default function DashboardLayout() {
         ASIDE
       </GridItem>
 
-      <GridItem area="main" bg="dodgerblue">
-        MAIN
+      <GridItem area="main" >
+        <GameGrid />
       </GridItem>
     </Grid>
   );
