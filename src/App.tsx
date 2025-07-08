@@ -18,7 +18,7 @@ export default function DashboardLayout() {
         ASIDE
       </GridItem>
 
-      <GridItem area="main" >
+      <GridItem area="main">
         <GameGrid />
       </GridItem>
     </Grid>
