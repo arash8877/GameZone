@@ -1,4 +1,5 @@
 import { Grid, GridItem, Show } from "@chakra-ui/react";
+import Navbar from "./components/Navbar";
 
 export default function DashboardLayout() {
   return (
@@ -8,8 +9,8 @@ export default function DashboardLayout() {
         lg: `"nav nav" "aside main"`,
       }}
     >
-      <GridItem area="nav" bg="coral">
-        NAV
+      <GridItem area="nav">
+        <Navbar />
       </GridItem>
       <GridItem area="aside" bg="gold" display={{ base: "none", lg: "block" }}>
         ASIDE
