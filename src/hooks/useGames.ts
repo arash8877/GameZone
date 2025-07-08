@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import apiClient from "../components/services/api-client";
 
 
-interface GameProps {
+export interface GameProps {
     id: number;
     name: string;
+    background_image: string;
   }
   
   interface FetchGamesResponse {
