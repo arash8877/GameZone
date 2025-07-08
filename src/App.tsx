@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, GridItem, Show } from "@chakra-ui/react";
+import { Grid, GridItem } from "@chakra-ui/react";
 import Navbar from "./components/Navbar";
 
 export default function DashboardLayout() {
