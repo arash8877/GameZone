@@ -2,13 +2,19 @@ import React, { useEffect, useState } from "react";
 import apiClient from "../components/services/api-client";
 import { CanceledError } from "axios";
 
+export interface GenreProps {
+    id: number;
+    name: string;
+    // image_background: string;
+  }
+
 export interface PlatformProps {
   id: number;
   name: string;
   slug: string;
 }
 
-export interface GameProps {
+export interface GenreProps {
   id: number;
   name: string;
   background_image: string;
@@ -16,23 +22,23 @@ export interface GameProps {
   metacritic: number;
 }
 
-interface FetchGamesResponse {
-  results: GameProps[];
+interface FetchGenresResponse {
+  results: GenreProps[];
   count: number;
 }
 
 //------------------------- useGames Hook -------------------------
-const useGames = () => {
-  const [games, setGames] = useState<GameProps[]>([]);
+const useGenres = () => {
+  const [genres, setGenres] = useState<GenreProps[]>([]);
   const [error, setError] = useState("");
   const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
     setLoading(true);
     apiClient
-      .get<FetchGamesResponse>("/games")
+      .get<FetchGenresResponse>("/genres")
       .then((res) => {
-        setGames(res.data.results);
+        setGenres(res.data.results);
         setLoading(false);
       })
       .catch((err) => {
@@ -42,7 +48,7 @@ const useGames = () => {
       });
   }, []);
 
-  return { games, error, isLoading };
+  return { genres, error, isLoading };
 };
 
-export default useGames;
+export default useGenres;
