@@ -5,7 +5,7 @@ import { CanceledError } from "axios";
 export interface GenreProps {
     id: number;
     name: string;
-    // image_background: string;
+    image_background: string;
   }
 
 export interface PlatformProps {
