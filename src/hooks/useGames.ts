@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import apiClient from "../components/services/api-client";
-
+import { CanceledError } from "axios";
 export interface PlatformProps {
   id: number;
   name: string;
@@ -24,16 +24,24 @@ interface FetchGamesResponse {
 const useGames = () => {
   const [games, setGames] = useState<GameProps[]>([]);
   const [error, setError] = useState("");
+  const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
     apiClient
       .get<FetchGamesResponse>("/games")
-      .then((res) => setGames(res.data.results) )
-      // .then((res) => console.log(res.data.results[0]) )
-      .catch((err) => setError(err.message));
+      .then((res) => {
+        setGames(res.data.results);
+        setLoading(false);
+      })
+      .catch((err) => {
+        if (err instanceof CanceledError) return;
+        setError(err.message);
+        setLoading(false);
+      });
   }, []);
 
-  return { games, error };
+  return { games, error, isLoading };
 };
 
 export default useGames;
