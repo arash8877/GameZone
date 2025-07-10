@@ -23,7 +23,7 @@ interface FetchGamesResponse {
 }
 
 //------------------------- useGames Hook -------------------------
-const useGames = ( selectedGenre : GenreProps | null) => {
+const useGames = (selectedGenre: GenreProps | null, selectedPlatform: PlatformProps | null) => {
   const [games, setGames] = useState<GameProps[]>([]);
   const [error, setError] = useState("");
   const [isLoading, setLoading] = useState(true);
@@ -31,7 +31,9 @@ const useGames = ( selectedGenre : GenreProps | null) => {
   useEffect(() => {
     setLoading(true);
     apiClient
-      .get<FetchGamesResponse>("/games", {params: { genres: selectedGenre?.id } })
+      .get<FetchGamesResponse>("/games", {
+        params: { genres: selectedGenre?.id, platforms: selectedPlatform?.id },
+      })
       .then((res) => {
         setGames(res.data.results);
         setLoading(false);
@@ -41,7 +43,7 @@ const useGames = ( selectedGenre : GenreProps | null) => {
         setError(err.message);
         setLoading(false);
       });
-  }, [selectedGenre?.id]);
+  }, [selectedGenre?.id, selectedPlatform?.id]);
 
   return { games, error, isLoading };
 };
