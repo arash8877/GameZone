@@ -3,8 +3,7 @@ import apiClient from "../components/services/api-client";
 import { CanceledError } from "axios";
 
 
-
-interface PlatformProps {
+export interface PlatformProps {
   id: number;
   name: string;
   slug: string;

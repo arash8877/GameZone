@@ -2,12 +2,7 @@ import React, { useEffect, useState } from "react";
 import apiClient from "../components/services/api-client";
 import { CanceledError } from "axios";
 import { GenreProps } from "./useGenres";
-
-export interface PlatformProps {
-  id: number;
-  name: string;
-  slug: string;
-}
+import { PlatformProps } from "./usePlatforms";
 
 export interface GameProps {
   id: number;
@@ -23,7 +18,11 @@ interface FetchGamesResponse {
 }
 
 //------------------------- useGames Hook -------------------------
-const useGames = (selectedGenre: GenreProps | null, selectedPlatform: PlatformProps | null) => {
+const useGames = (
+  selectedGenre: GenreProps | null,
+  selectedPlatform: PlatformProps | null,
+  sortOrder: string
+) => {
   const [games, setGames] = useState<GameProps[]>([]);
   const [error, setError] = useState("");
   const [isLoading, setLoading] = useState(true);
@@ -32,7 +31,7 @@ const useGames = (selectedGenre: GenreProps | null, selectedPlatform: PlatformPr
     setLoading(true);
     apiClient
       .get<FetchGamesResponse>("/games", {
-        params: { genres: selectedGenre?.id, platforms: selectedPlatform?.id },
+        params: { genres: selectedGenre?.id, platforms: selectedPlatform?.id, ordering: sortOrder },
       })
       .then((res) => {
         setGames(res.data.results);
@@ -43,7 +42,7 @@ const useGames = (selectedGenre: GenreProps | null, selectedPlatform: PlatformPr
         setError(err.message);
         setLoading(false);
       });
-  }, [selectedGenre?.id, selectedPlatform?.id]);
+  }, [selectedGenre?.id, selectedPlatform?.id, sortOrder]);
 
   return { games, error, isLoading };
 };
