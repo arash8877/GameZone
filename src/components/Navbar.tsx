@@ -4,12 +4,10 @@ import ColorModeSwitch from "./ColorModeSwitch";
 import logo from "../assets/logo.webp";
 import SearchInput from "./SearchInput";
 
-
-
 const Navbar = () => {
   return (
-    <HStack justifyContent='space-between' padding='10px'>
-      <Image src={logo} boxSize='60px'/>
+    <HStack padding="10px">
+      <Image src={logo} boxSize="60px" />
       <SearchInput />
       <ColorModeSwitch />
     </HStack>
