@@ -6,6 +6,7 @@ import { useState } from "react";
 import { GenreProps, PlatformProps } from "./hooks/useGenres";
 import PlatformSelector from "./components/PlatformSelector";
 import SortSelector from "./components/SortSelector";
+import GameHeading from "./components/GameHeading";
 
 //----------------- App Component -----------------
 export default function App() {
@@ -34,6 +35,7 @@ export default function App() {
       </GridItem>
 
       <GridItem area="main">
+        <GameHeading />
         <Flex paddingLeft={2} marginBottom={5} gap={5}>
           <PlatformSelector
             selectedPlatform={selectedPlatform}
