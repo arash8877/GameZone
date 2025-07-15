@@ -24,7 +24,7 @@ const GameGrid = ({ selectedGenre, selectedPlatform, sortOrder, searchText }: Ga
   return (
     <>
       {error && <Text>Error: {error}</Text>}
-      <SimpleGrid columns={{ sm: 1, md: 2, lg: 3, xl: 4 }} spacing={3} padding="10px">
+      <SimpleGrid columns={{ sm: 1, md: 2, lg: 3, xl: 4 }} spacing={6} padding="10px">
         {isLoading && Skeletons.map((skeleton) => <GameCardSkeleton key={skeleton} />)}
         {games.map((game) => (
           <GameCard key={game.id} game={game} />
