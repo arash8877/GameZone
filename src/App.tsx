@@ -37,7 +37,7 @@ export default function App() {
       <GridItem area="main">
         <Box paddingLeft={2}>
           <GameHeading selectedGenre={selectedGenre} selectedPlatform={selectedPlatform} />
-          <Flex  marginBottom={5} gap={5}>
+          <Flex marginBottom={5} gap={5}>
             <PlatformSelector
               selectedPlatform={selectedPlatform}
               onSelectPlatform={(platform) => setSelectedPlatform(platform)}
