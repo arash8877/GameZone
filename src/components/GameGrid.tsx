@@ -10,11 +10,12 @@ interface GameGridProps {
   selectedGenre: GenreProps | null;
   selectedPlatform: PlatformProps | null;
   sortOrder: string;
+  searchText: string;
 }
 
 //------------------------- GameGrid Component -------------------------
-const GameGrid = ({ selectedGenre, selectedPlatform, sortOrder }: GameGridProps) => {
-  const { games, error, isLoading } = useGames(selectedGenre, selectedPlatform, sortOrder);
+const GameGrid = ({ selectedGenre, selectedPlatform, sortOrder, searchText }: GameGridProps) => {
+  const { games, error, isLoading } = useGames(selectedGenre, selectedPlatform, sortOrder, searchText);
   const Skeletons = [1, 2, 3, 4, 5, 6];
 
  

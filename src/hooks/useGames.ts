@@ -21,7 +21,8 @@ interface FetchGamesResponse {
 const useGames = (
   selectedGenre: GenreProps | null,
   selectedPlatform: PlatformProps | null,
-  sortOrder: string
+  sortOrder: string,
+  searchText: string
 ) => {
   const [games, setGames] = useState<GameProps[]>([]);
   const [error, setError] = useState("");
@@ -31,7 +32,7 @@ const useGames = (
     setLoading(true);
     apiClient
       .get<FetchGamesResponse>("/games", {
-        params: { genres: selectedGenre?.id, platforms: selectedPlatform?.id, ordering: sortOrder },
+        params: { genres: selectedGenre?.id, platforms: selectedPlatform?.id, ordering: sortOrder, search: searchText },
       })
       .then((res) => {
         setGames(res.data.results);
@@ -42,7 +43,7 @@ const useGames = (
         setError(err.message);
         setLoading(false);
       });
-  }, [selectedGenre?.id, selectedPlatform?.id, sortOrder]);
+  }, [selectedGenre?.id, selectedPlatform?.id, sortOrder, searchText]);
 
   return { games, error, isLoading };
 };

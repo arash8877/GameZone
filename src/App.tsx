@@ -12,6 +12,7 @@ export default function App() {
   const [selectedGenre, setSelectedGenre] = useState<GenreProps | null>(null);
   const [selectedPlatform, setSelectedPlatform] = useState<PlatformProps | null>(null);
   const [sortOrder, setSortOrder] = useState<string>("");
+  const [searchText, setSearchText] = useState<string>("");
 
   //------------------ JSX -----------------
   return (
@@ -23,7 +24,7 @@ export default function App() {
       templateColumns={{ base: "1fr", lg: "200px 1fr" }}
     >
       <GridItem area="nav">
-        <Navbar />
+        <Navbar onSearch={(text) => setSearchText(text)} />
       </GridItem>
       <GridItem area="aside" paddingX={5} display={{ base: "none", lg: "block" }}>
         <GenreList
@@ -38,12 +39,14 @@ export default function App() {
             selectedPlatform={selectedPlatform}
             onSelectPlatform={(platform) => setSelectedPlatform(platform)}
           />
-          <SortSelector 
-            onSelectSortOrder={(order) => setSortOrder(order)} 
-            sortOrder= {sortOrder}
-          />
+          <SortSelector onSelectSortOrder={(order) => setSortOrder(order)} sortOrder={sortOrder} />
         </Flex>
-        <GameGrid selectedGenre={selectedGenre} selectedPlatform={selectedPlatform} sortOrder={sortOrder}/>
+        <GameGrid
+          selectedGenre={selectedGenre}
+          selectedPlatform={selectedPlatform}
+          sortOrder={sortOrder}
+          searchText={searchText}
+        />
       </GridItem>
     </Grid>
   );
