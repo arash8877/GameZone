@@ -15,22 +15,24 @@ interface GameGridProps {
 
 //------------------------- GameGrid Component -------------------------
 const GameGrid = ({ selectedGenre, selectedPlatform, sortOrder, searchText }: GameGridProps) => {
-  const { games, error, isLoading } = useGames(selectedGenre, selectedPlatform, sortOrder, searchText);
+  const { games, error, isLoading } = useGames(
+    selectedGenre,
+    selectedPlatform,
+    sortOrder,
+    searchText
+  );
   const Skeletons = [1, 2, 3, 4, 5, 6];
 
- 
+  if (error) return <Text>Error: {error}</Text>;
 
   //-------------------- JSX --------------------
   return (
-    <>
-      {error && <Text>Error: {error}</Text>}
-      <SimpleGrid columns={{ sm: 1, md: 2, lg: 3, xl: 4 }} spacing={6} padding="10px">
-        {isLoading && Skeletons.map((skeleton) => <GameCardSkeleton key={skeleton} />)}
-        {games.map((game) => (
-          <GameCard key={game.id} game={game} />
-        ))}
-      </SimpleGrid>
-    </>
+    <SimpleGrid columns={{ sm: 1, md: 2, lg: 3, xl: 4 }} spacing={6} padding="10px">
+      {isLoading && Skeletons.map((skeleton) => <GameCardSkeleton key={skeleton} />)}
+      {games.map((game) => (
+        <GameCard key={game.id} game={game} />
+      ))}
+    </SimpleGrid>
   );
 };
 
