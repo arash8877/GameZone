@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import apiClient from "../components/services/api-client";
 import { CanceledError } from "axios";
 import genres from "../data/genres";
+import { PlatformProps } from "./usePlatforms";
 
 export interface GenreProps {
     id: number;
@@ -9,19 +10,6 @@ export interface GenreProps {
     image_background: string;
   }
 
-export interface PlatformProps {
-  id: number;
-  name: string;
-  slug: string;
-}
-
-export interface GenreProps {
-  id: number;
-  name: string;
-  background_image: string;
-  parent_platforms: { platform: PlatformProps }[];
-  metacritic: number;
-}
 
 interface FetchGenresResponse {
   results: GenreProps[];

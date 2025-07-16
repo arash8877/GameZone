@@ -4,7 +4,7 @@ import { SiNintendo } from "react-icons/si";
 import { BsGlobe } from "react-icons/bs";
 import { HStack, Icon } from "@chakra-ui/react";
 import { IconType } from "react-icons";
-import { PlatformProps } from "../hooks/useGames";
+import { PlatformProps } from "../hooks/usePlatforms"; 
 import { Text } from "@chakra-ui/react";
 
 interface PlatformIconListProps {
