@@ -7,7 +7,17 @@ import "./index.css";
 import App from "./App";
 import theme from "./theme";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: 3,
+      gcTime: 300000, // Garbage Collection Time -  After 5 minutes of no component using the query, the cached data will be deleted.
+      staleTime: 10* 1000, // After 10 seconds of no component using the query, the data will be considered stale and will be refetched on next use.
+      refetchOnReconnect: true,
+      refetchOnMount: false,
+    },
+  },
+});
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
