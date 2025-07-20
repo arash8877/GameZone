@@ -1,23 +1,23 @@
 import { useEffect, useState } from "react";
-import apiClient from "../components/services/api-client";
 import { CanceledError } from "axios";
 import genres from "../data/genres";
 import { PlatformProps } from "./usePlatforms";
+import apiClient from "../components/services/api-client";
+import { useQuery } from "@tanstack/react-query";
 
 export interface GenreProps {
-    id: number;
-    name: string;
-    image_background: string;
-  }
-
+  id: number;
+  name: string;
+  image_background: string;
+}
 
 interface FetchGenresResponse {
-  results: GenreProps[];
   count: number;
+  results: GenreProps[];
 }
 
 //------------------------- useGames Hook -------------------------
-const useGenres = () => {
+const useGenres = () =>
   // const [genres, setGenres] = useState<GenreProps[]>([]);
   // const [error, setError] = useState("");
   // const [isLoading, setLoading] = useState(true);
@@ -37,13 +37,10 @@ const useGenres = () => {
   //     });
   // }, []);
 
-  return { genres: genres, error: null, isLoading:false };
-};
+  useQuery({
+    queryKey: ["genres"],
+    queryFn: () => apiClient.get<FetchGenresResponse>("/genres").then((res) => res.data),
+    staleTime: 24 * 60 * 60 * 1000, // 24 hours
+  });
 
 export default useGenres;
-
-
-
-
-// instead of getting genres from the API every time the page is rendered, we are using a static data file
-// to avoid unnecessary API calls and improve performance.

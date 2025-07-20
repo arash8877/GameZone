@@ -6,6 +6,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import "./index.css";
 import App from "./App";
 import theme from "./theme";
+import { FaLaptopHouse } from "react-icons/fa";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -25,7 +26,7 @@ createRoot(document.getElementById("root")!).render(
       <ColorModeScript initialColorMode={theme.config.initialColorMode} />
       <QueryClientProvider client={queryClient}>
         <App />
-        <ReactQueryDevtools />
+        <ReactQueryDevtools initialIsOpen={false}/>
       </QueryClientProvider>
     </ChakraProvider>
   </StrictMode>

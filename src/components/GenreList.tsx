@@ -8,7 +8,7 @@ interface GenreListProps {
 
 //----------------- GenreList Component -----------------
 const GenreList = ({ onSelectGenre, selectedGenre }: GenreListProps) => {
-  const { genres, isLoading, error } = useGenres();
+  const { data, isLoading, error } = useGenres();
 
   if (error) return null;
 
@@ -17,9 +17,11 @@ const GenreList = ({ onSelectGenre, selectedGenre }: GenreListProps) => {
   //----------------- JSX -----------------
   return (
     <>
-    <Heading fontSize='2xl' marginBottom={3}>Genres</Heading>
+      <Heading fontSize="2xl" marginBottom={3}>
+        Genres
+      </Heading>
       <List>
-        {genres.map((genre) => (
+        {data?.results.map((genre) => (
           <ListItem key={genre.id} paddingY="5px">
             <HStack>
               <Image
