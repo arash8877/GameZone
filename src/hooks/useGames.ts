@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import apiClient from "../components/services/api-client";
 import { CanceledError } from "axios";
+import apiClient from "../components/services/api-client";
 import { GenreProps } from "./useGenres";
 import { PlatformProps } from "./usePlatforms";
+import { useQuery } from "@tanstack/react-query";
 
 export interface GameProps {
   id: number;
@@ -25,28 +26,46 @@ const useGames = (
   sortOrder: string,
   searchText: string
 ) => {
-  const [games, setGames] = useState<GameProps[]>([]);
-  const [error, setError] = useState("");
-  const [isLoading, setLoading] = useState(true);
+  // const [games, setGames] = useState<GameProps[]>([]);
+  // const [error, setError] = useState("");
+  // const [isLoading, setLoading] = useState(true);
 
-  useEffect(() => {
-    setLoading(true);
-    apiClient
-      .get<FetchGamesResponse>("/games", {
-        params: { genres: selectedGenre?.id, platforms: selectedPlatform?.id, ordering: sortOrder, search: searchText },
-      })
-      .then((res) => {
-        setGames(res.data.results);
-        setLoading(false);
-      })
-      .catch((err) => {
-        if (err instanceof CanceledError) return;
-        setError(err.message);
-        setLoading(false);
-      });
-  }, [selectedGenre?.id, selectedPlatform?.id, sortOrder, searchText]);
+  // useEffect(() => {
+  //   setLoading(true);
+  //   apiClient
+  //     .get<FetchGamesResponse>("/games", {
+  //       params: {
+  //         genres: selectedGenre?.id,
+  //         platforms: selectedPlatform?.id,
+  //         ordering: sortOrder,
+  //         search: searchText,
+  //       },
+  //     })
+  //     .then((res) => {
+  //       setGames(res.data.results);
+  //       setLoading(false);
+  //     })
+  //     .catch((err) => {
+  //       if (err instanceof CanceledError) return;
+  //       setError(err.message);
+  //       setLoading(false);
+  //     });
+  // }, [selectedGenre?.id, selectedPlatform?.id, sortOrder, searchText]);
 
-  return { games, error, isLoading };
+  useQuery({
+    queryKey: ["games"],
+    queryFn: () =>
+      apiClient
+        .get<FetchGamesResponse>("/games", {
+          params: {
+            genres: selectedGenre?.id,
+            platforms: selectedPlatform?.id,
+            ordering: sortOrder,
+            search: searchText,
+          },
+        })
+        .then((res) => res.data),
+  });
 };
 
 export default useGames;
