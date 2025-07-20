@@ -52,14 +52,14 @@ const useGames = (
   //     });
   // }, [selectedGenre?.id, selectedPlatform?.id, sortOrder, searchText]);
 
-  useQuery({
-    queryKey: ["games"],
+  return useQuery<FetchGamesResponse>({
+    queryKey: ["games", selectedGenre?.id, selectedPlatform?.id, sortOrder, searchText],
     queryFn: () =>
       apiClient
         .get<FetchGamesResponse>("/games", {
           params: {
             genres: selectedGenre?.id,
-            platforms: selectedPlatform?.id,
+            parent_platforms: selectedPlatform?.id,
             ordering: sortOrder,
             search: searchText,
           },
