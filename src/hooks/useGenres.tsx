@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { CanceledError } from "axios";
-import genres from "../data/genres";
 import { PlatformProps } from "./usePlatforms";
+import genres from "../data/genres";
 import APIClient from "../components/services/api-client";
 import { useQuery } from "@tanstack/react-query";
 
@@ -39,7 +39,7 @@ const useGenres = () => {
 
   const apiClient = new APIClient<GenreProps>("/genres");
 
-  useQuery({
+  return useQuery({
     queryKey: ["genres"],
     queryFn: apiClient.getAll,
     staleTime: 24 * 60 * 60 * 1000, // 24 hours
