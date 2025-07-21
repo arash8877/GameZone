@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { CanceledError } from "axios";
-import APIClient from "../components/services/api-client";
+import APIClient, {FetchResponse} from "../components/services/api-client";
 import { GenreProps } from "./useGenres";
 import { PlatformProps } from "./usePlatforms";
 import { useQuery } from "@tanstack/react-query";
@@ -14,10 +14,6 @@ export interface GameProps {
   rating_top: number;
 }
 
-interface FetchGamesResponse {
-  results: GameProps[];
-  count: number;
-}
 
 //------------------------- useGames Hook -------------------------
 const useGames = (
@@ -55,7 +51,7 @@ const useGames = (
 
   const apiClient = new APIClient<GameProps>("/games");
 
-  return useQuery<FetchGamesResponse>({
+  return useQuery<FetchResponse<GameProps>>({
     queryKey: ["games", selectedGenre?.id, selectedPlatform?.id, sortOrder, searchText],
     queryFn: () =>
      apiClient.getAll({
