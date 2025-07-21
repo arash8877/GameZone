@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { CanceledError } from "axios";
-import APIClient, {FetchResponse} from "../components/services/api-client";
+import APIClient, { FetchResponse } from "../components/services/api-client";
 import { GenreProps } from "./useGenres";
 import { PlatformProps } from "./usePlatforms";
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 
 export interface GameProps {
   id: number;
@@ -13,7 +13,6 @@ export interface GameProps {
   metacritic: number;
   rating_top: number;
 }
-
 
 //------------------------- useGames Hook -------------------------
 const useGames = (
@@ -48,21 +47,24 @@ const useGames = (
   //     });
   // }, [selectedGenre?.id, selectedPlatform?.id, sortOrder, searchText]);
 
-
   const apiClient = new APIClient<GameProps>("/games");
 
-  return useQuery<FetchResponse<GameProps>>({
+  return useInfiniteQuery<FetchResponse<GameProps>>({
     queryKey: ["games", selectedGenre?.id, selectedPlatform?.id, sortOrder, searchText],
-    queryFn: () =>
-     apiClient.getAll({
-      params: {
-        genres: selectedGenre?.id,
-        parent_platforms: selectedPlatform?.id,
-        ordering: sortOrder,
-        search: searchText,
-      },
-     })
-     
+    queryFn: ({ pageParam = 1 }) =>
+      apiClient.getAll({
+        params: {
+          genres: selectedGenre?.id,
+          parent_platforms: selectedPlatform?.id,
+          ordering: sortOrder,
+          search: searchText,
+          page: pageParam,
+        },
+      }),
+    initialPageParam: 1,
+    getNextPageParam: (lastPage, allPages) => {
+      return lastPage.next ? allPages.length + 1 : undefined;
+    },
   });
 };
 

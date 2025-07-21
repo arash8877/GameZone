@@ -3,6 +3,7 @@ const RAWG_API_KEY = import.meta.env.VITE_RAWG_API_KEY;
 
 export interface FetchResponse<T> {
   count: number;
+  next?: string | null;
   results: T[];
 }
 
