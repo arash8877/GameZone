@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { CanceledError } from "axios";
-import apiClient from "../components/services/api-client";
+import APIClient from "../components/services/api-client";
 import { GenreProps } from "./useGenres";
 import { PlatformProps } from "./usePlatforms";
 import { useQuery } from "@tanstack/react-query";
@@ -52,19 +52,21 @@ const useGames = (
   //     });
   // }, [selectedGenre?.id, selectedPlatform?.id, sortOrder, searchText]);
 
+
+  const apiClient = new APIClient<GameProps>("/games");
+
   return useQuery<FetchGamesResponse>({
     queryKey: ["games", selectedGenre?.id, selectedPlatform?.id, sortOrder, searchText],
     queryFn: () =>
-      apiClient
-        .get<FetchGamesResponse>("/games", {
-          params: {
-            genres: selectedGenre?.id,
-            parent_platforms: selectedPlatform?.id,
-            ordering: sortOrder,
-            search: searchText,
-          },
-        })
-        .then((res) => res.data),
+     apiClient.getAll({
+      params: {
+        genres: selectedGenre?.id,
+        parent_platforms: selectedPlatform?.id,
+        ordering: sortOrder,
+        search: searchText,
+      },
+     })
+     
   });
 };
 
