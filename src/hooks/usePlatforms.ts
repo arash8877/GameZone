@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import apiClient from "../components/services/api-client";
+import APIClient from "../components/services/api-client";
 import { CanceledError } from "axios";
+import { useQuery } from "@tanstack/react-query";
 
 
 export interface PlatformProps {
@@ -16,26 +17,36 @@ interface FetchPlatformsResponse {
 
 //------------------------- useGames Hook -------------------------
 const usePlatforms = () => {
-    const [platforms, setPlatforms] = useState<PlatformProps[]>([]);
-    const [error, setError] = useState("");
-    const [isLoading, setLoading] = useState(true);
+    // const [platforms, setPlatforms] = useState<PlatformProps[]>([]);
+    // const [error, setError] = useState("");
+    // const [isLoading, setLoading] = useState(true);
   
-    useEffect(() => {
-      setLoading(true);
-      apiClient
-        .get<FetchPlatformsResponse>("/platforms/lists/parents")
-        .then((res) => {
-          setPlatforms(res.data.results);
-          setLoading(false);
-        })
-        .catch((err) => {
-          if (err instanceof CanceledError) return;
-          setError(err.message);
-          setLoading(false);
-        });
-    }, []);
+    // useEffect(() => {
+    //   setLoading(true);
+    //   apiClient
+    //     .get<FetchPlatformsResponse>("/platforms/lists/parents")
+    //     .then((res) => {
+    //       setPlatforms(res.data.results);
+    //       setLoading(false);
+    //     })
+    //     .catch((err) => {
+    //       if (err instanceof CanceledError) return;
+    //       setError(err.message);
+    //       setLoading(false);
+    //     });
+    // }, []);
   
-    return { platforms, error, isLoading };
+    // return { platforms, error, isLoading };
+
+   const apiClient = new APIClient<PlatformProps>('/platforms/lists/parents');
+
+   useQuery({
+    queryKey: ["platforms"],
+    queryFn: apiClient.getAll,
+    
+  
+   })
+
   };
   
   export default usePlatforms;
