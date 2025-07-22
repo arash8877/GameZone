@@ -1,22 +1,13 @@
-import { Box, Flex, Grid, GridItem, HStack } from "@chakra-ui/react";
+import { Box, Flex, Grid, GridItem } from "@chakra-ui/react";
 import Navbar from "./components/Navbar";
 import GameGrid from "./components/GameGrid";
 import GenreList from "./components/GenreList";
-import { useState } from "react";
-import { GenreProps } from "./hooks/useGenres";
-import { PlatformProps } from "./hooks/usePlatforms";
 import PlatformSelector from "./components/PlatformSelector";
 import SortSelector from "./components/SortSelector";
 import GameHeading from "./components/GameHeading";
 
 //----------------- App Component -----------------
 export default function App() {
-  // const [selectedGenre, setSelectedGenre] = useState<GenreProps | null>(null);
-  // const [selectedPlatform, setSelectedPlatform] = useState<PlatformProps | null>(null);
-  // const [sortOrder, setSortOrder] = useState<string>("");
-  // const [searchText, setSearchText] = useState<string>("");
-
-  //------------------ JSX -----------------
   return (
     <Grid
       templateAreas={{

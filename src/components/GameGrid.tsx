@@ -1,10 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Box, Button, SimpleGrid, Text } from "@chakra-ui/react";
 import useGames from "../hooks/useGames";
 import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
-import { GenreProps } from "../hooks/useGenres";
-import { PlatformProps } from "../hooks/usePlatforms";
 
 //------------------------- GameGrid Component -------------------------
 const GameGrid = () => {
