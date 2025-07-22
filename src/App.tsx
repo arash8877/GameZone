@@ -11,10 +11,10 @@ import GameHeading from "./components/GameHeading";
 
 //----------------- App Component -----------------
 export default function App() {
-  const [selectedGenre, setSelectedGenre] = useState<GenreProps | null>(null);
-  const [selectedPlatform, setSelectedPlatform] = useState<PlatformProps | null>(null);
-  const [sortOrder, setSortOrder] = useState<string>("");
-  const [searchText, setSearchText] = useState<string>("");
+  // const [selectedGenre, setSelectedGenre] = useState<GenreProps | null>(null);
+  // const [selectedPlatform, setSelectedPlatform] = useState<PlatformProps | null>(null);
+  // const [sortOrder, setSortOrder] = useState<string>("");
+  // const [searchText, setSearchText] = useState<string>("");
 
   //------------------ JSX -----------------
   return (
@@ -26,7 +26,7 @@ export default function App() {
       templateColumns={{ base: "1fr", lg: "200px 1fr" }}
     >
       <GridItem area="nav">
-        <Navbar onSearch={(text) => setSearchText(text)} />
+        <Navbar />
       </GridItem>
       <GridItem area="aside" paddingX={5} display={{ base: "none", lg: "block" }}>
         <GenreList
