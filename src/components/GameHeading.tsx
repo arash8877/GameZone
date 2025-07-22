@@ -1,18 +1,16 @@
 import { Heading } from "@chakra-ui/react";
-import { PlatformProps } from "../hooks/usePlatforms";
-import { GenreProps } from "../hooks/useGenres";
-
-interface GameHeadingProps {
-  selectedGenre: GenreProps | null;
-  selectedPlatform: PlatformProps | null;
-}
+import useGameQueryStore from "../store";
 
 //------------------ GameHeading Component -----------------
-const GameHeading = ({ selectedGenre, selectedPlatform }: GameHeadingProps) => {
+const GameHeading = () => {
+  // const {selectedGenre, selectedPlatform} = useGameQueryStore(); if I use this, any time, any value changes in useGameQueryStore, this component will re-render
+  const selectedGenre = useGameQueryStore((s) => s.selectedGenre); // If I use a selector, the component only dependent on selectedGenre.
+  const selectedPlatform = useGameQueryStore((s) => s.selectedPlatform); // If I use a selector, the component only dependent on selectedPlatform and selectedGenre.
+
   const heading = `${selectedPlatform?.name || ""} ${selectedGenre?.name || ""} Games`;
 
   return (
-    <Heading as="h1" marginY={5} fontSize='5xl'>
+    <Heading as="h1" marginY={5} fontSize="5xl">
       {heading}
     </Heading>
   );
