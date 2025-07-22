@@ -37,10 +37,7 @@ export default function App() {
           <GameHeading />
           <Flex marginBottom={5} gap={5}>
             <PlatformSelector />
-            <SortSelector
-              onSelectSortOrder={(order) => setSortOrder(order)}
-              sortOrder={sortOrder}
-            />
+            <SortSelector />
           </Flex>
         </Box>
         <GameGrid
