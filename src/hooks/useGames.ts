@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { CanceledError } from "axios";
 import APIClient, { FetchResponse } from "../components/services/api-client";
-import { GenreProps } from "./useGenres";
+import { useInfiniteQuery } from "@tanstack/react-query";
+import useGameQueryStore from "../store";
 import { PlatformProps } from "./usePlatforms";
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 
 export interface GameProps {
   id: number;
@@ -15,12 +13,7 @@ export interface GameProps {
 }
 
 //------------------------- useGames Hook -------------------------
-const useGames = (
-  selectedGenre: GenreProps | null,
-  selectedPlatform: PlatformProps | null,
-  sortOrder: string,
-  searchText: string
-) => {
+const useGames = () => {
   // const [games, setGames] = useState<GameProps[]>([]);
   // const [error, setError] = useState("");
   // const [isLoading, setLoading] = useState(true);
@@ -48,6 +41,8 @@ const useGames = (
   // }, [selectedGenre?.id, selectedPlatform?.id, sortOrder, searchText]);
 
   const apiClient = new APIClient<GameProps>("/games");
+
+  const { selectedGenre, selectedPlatform, sortOrder, searchText } = useGameQueryStore();
 
   return useInfiniteQuery<FetchResponse<GameProps>>({
     queryKey: ["games", selectedGenre?.id, selectedPlatform?.id, sortOrder, searchText],

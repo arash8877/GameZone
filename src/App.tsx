@@ -40,12 +40,7 @@ export default function App() {
             <SortSelector />
           </Flex>
         </Box>
-        <GameGrid
-          selectedGenre={selectedGenre}
-          selectedPlatform={selectedPlatform}
-          sortOrder={sortOrder}
-          searchText={searchText}
-        />
+        <GameGrid />
       </GridItem>
     </Grid>
   );
