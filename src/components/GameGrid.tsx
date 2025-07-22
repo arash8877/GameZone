@@ -3,11 +3,12 @@ import { Box, Button, SimpleGrid, Text } from "@chakra-ui/react";
 import useGames from "../hooks/useGames";
 import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
+import GameCardContainer from "./GameCardContainer";
 
 //------------------------- GameGrid Component -------------------------
 const GameGrid = () => {
   const { data, error, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage } = useGames();
-  const Skeletons = [1, 2, 3, 4, 5, 6];
+  const Skeletons = [1, 2, 3, 4, 5, 6, 7, 8];
 
   if (error) return <Text>Error: {error.message}</Text>;
 
@@ -15,7 +16,12 @@ const GameGrid = () => {
   return (
     <Box padding="10px">
       <SimpleGrid columns={{ sm: 1, md: 2, lg: 3, xl: 4 }} spacing={6}>
-        {isLoading && Skeletons.map((skeleton) => <GameCardSkeleton key={skeleton} />)}
+        {isLoading &&
+          Skeletons.map((skeleton) => (
+            <GameCardContainer key={skeleton}>
+              <GameCardSkeleton />
+            </GameCardContainer>
+          ))}
 
         {data?.pages.map((page, index) => (
           <React.Fragment key={index}>
