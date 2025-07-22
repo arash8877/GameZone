@@ -29,10 +29,7 @@ export default function App() {
         <Navbar />
       </GridItem>
       <GridItem area="aside" paddingX={5} display={{ base: "none", lg: "block" }}>
-        <GenreList
-          onSelectGenre={(genre) => setSelectedGenre(genre)}
-          selectedGenre={selectedGenre}
-        />
+        <GenreList />
       </GridItem>
 
       <GridItem area="main">

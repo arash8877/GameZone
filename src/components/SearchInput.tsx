@@ -10,7 +10,7 @@ const SearchInput = () => {
   const ref = useRef<HTMLInputElement>(null);
 
 
-  // const {setSearchText} = useGameQueryStore(); // if I use this, any time, any value changes in useGameQueryStore, this component will re-render
+  // const {setSearchText} = useGameQueryStore(); if I use this, any time, any value changes in useGameQueryStore, this component will re-render
   const setSearchText = useGameQueryStore(s => s.setSearchText) // If I use a selector, the component only dependent on setSearchText.
 
   //------------------ JSX ------------------

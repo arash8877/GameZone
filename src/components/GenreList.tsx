@@ -1,16 +1,16 @@
 import { Button, HStack, Heading, Image, List, ListItem, Spinner } from "@chakra-ui/react";
-import useGenres, { GenreProps } from "../hooks/useGenres";
+import useGenres from "../hooks/useGenres";
 import useGameQueryStore from "../store";
 
-interface GenreListProps {
-  onSelectGenre: (genre: GenreProps) => void;
-  selectedGenre?: GenreProps | null;
-}
+
 
 //----------------- GenreList Component -----------------
 const GenreList = () => {
   const { data, isLoading, error } = useGenres();
-  const { selectedGenre, setGenre} = useGameQueryStore();
+
+  // const { selectedGenre, setGenre} = useGameQueryStore();   if I use this, any time, any value changes in useGameQueryStore, this component will re-render
+  const selectedGenre = useGameQueryStore(s => s.selectedGenre); // If I use a selector, the component only dependent on selectedGenre.
+  const setGenre = useGameQueryStore(s => s.setGenre); // If I use a selector, the component only dependent on setGenre and selectedGenre.
 
   if (error) return null;
 
