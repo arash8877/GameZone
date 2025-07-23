@@ -23,9 +23,9 @@ const GameCard = ({ game }: GameCardProps) => {
             />
             <CriticScore score={game.metacritic} />
           </HStack>
-          <Heading fontSize="2xl">
+          <Heading fontSize="2xl" paddingBottom={5} isTruncated>
             {game.name}
-            <Emoji rating={game.rating_top} />{' '}
+            <Emoji rating={game.rating_top} />
           </Heading>
         </CardBody>
       </Card>

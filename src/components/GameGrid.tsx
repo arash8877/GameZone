@@ -1,13 +1,20 @@
-import React from "react";
-import { Box, Button, SimpleGrid, Text } from "@chakra-ui/react";
-import useGames from "../hooks/useGames";
-import GameCard from "./GameCard";
-import GameCardSkeleton from "./GameCardSkeleton";
-import GameCardContainer from "./GameCardContainer";
+import React from 'react';
+import { Box, Button, SimpleGrid, Text } from '@chakra-ui/react';
+import useGames from '../hooks/useGames';
+import GameCard from './GameCard';
+import GameCardSkeleton from './GameCardSkeleton';
+import GameCardContainer from './GameCardContainer';
 
 //------------------------- GameGrid Component -------------------------
 const GameGrid = () => {
-  const { data, error, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage } = useGames();
+  const {
+    data,
+    error,
+    isLoading,
+    isFetchingNextPage,
+    fetchNextPage,
+    hasNextPage,
+  } = useGames();
   const Skeletons = [1, 2, 3, 4, 5, 6, 7, 8];
 
   if (error) return <Text>Error: {error.message}</Text>;
@@ -33,11 +40,17 @@ const GameGrid = () => {
           </React.Fragment>
         ))}
       </SimpleGrid>
-      {hasNextPage && (
-        <Button onClick={() => fetchNextPage()} marginY={5}>
-          {isFetchingNextPage ? "Loading..." : "Load More"}
-        </Button>
-      )}
+      <Box display="flex" justifyContent="center" marginTop={4}>
+        {hasNextPage && (
+          <Button
+            onClick={() => fetchNextPage()}
+            marginY={5}
+            colorScheme="yellow"
+          >
+            {isFetchingNextPage ? 'Loading...' : 'Load More'}
+          </Button>
+        )}
+      </Box>
     </Box>
   );
 };
