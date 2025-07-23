@@ -1,10 +1,11 @@
-import { Box, HStack, Image } from '@chakra-ui/react';
+import { Box, HStack, Image, useColorModeValue } from '@chakra-ui/react';
 import ColorModeSwitch from './ColorModeSwitch';
 import logo from '../assets/logo.webp';
 import SearchInput from './SearchInput';
 import { Link } from 'react-router-dom';
 
 const Navbar = () => {
+  const bgColor = useColorModeValue('white', '#121212');
   return (
     <Box
       position="fixed"
@@ -12,8 +13,7 @@ const Navbar = () => {
       left="0"
       width="100%"
       zIndex="100"
-      bg="#121212"
-      boxShadow="sm"
+      bg={bgColor}
     >
       <HStack paddingX="30px" paddingY="10px">
         <Link to="/">
