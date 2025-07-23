@@ -2,11 +2,19 @@ import APIClient, { FetchResponse } from "../components/services/api-client";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import useGameQueryStore from "../store";
 import { PlatformProps } from "./usePlatforms";
+import { GenreProps } from "./useGenres";
+
+interface iPublisher {
+  id: number;
+  name: string;
+}
 
 export interface GameProps {
   id: number;
   name: string;
   slug: string;
+  genres: GenreProps[];
+  publishers: iPublisher[];
   description_raw: string;
   background_image: string;
   parent_platforms: { platform: PlatformProps }[];
