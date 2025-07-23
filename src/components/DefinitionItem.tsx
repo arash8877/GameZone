@@ -9,7 +9,7 @@ interface iProps {
 const DefinitionItem = ({ term, children }: iProps) => {
   return (
     <Box marginY={5}>
-      <Heading as="dt" fontSize="md" color="gray.600">
+      <Heading as="dt" fontSize="md" color="gray.600" marginBottom={2}>
         {term}
       </Heading>
       <dd>{children}</dd>
