@@ -2,6 +2,7 @@ import { Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
 import { useRef } from "react";
 import { BsSearch } from "react-icons/bs";
 import useGameQueryStore from "../store";
+import { useNavigate } from "react-router-dom";
 
 //----------------- SearchInput Component -----------------
 const SearchInput = () => {
@@ -12,6 +13,7 @@ const SearchInput = () => {
 
   // const {setSearchText} = useGameQueryStore(); if I use this, any time, any value changes in useGameQueryStore, this component will re-render
   const setSearchText = useGameQueryStore(s => s.setSearchText) // If I use a selector, the component only dependent on setSearchText.
+  const navigate = useNavigate();
 
   //------------------ JSX ------------------
   return (
@@ -20,6 +22,7 @@ const SearchInput = () => {
         e.preventDefault();
         if (ref.current) {
           setSearchText(ref.current.value);
+          navigate('/');
         }
       }}
     >
