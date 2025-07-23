@@ -18,9 +18,7 @@ const GameTrailer = ({ gameId }: iProps) => {
       src={data?.results[0]?.data[480]}
       poster={data?.results[0]?.preview}
       controls
-      width={640}
-      height={360}
-      style={{ marginTop: '20px' }}
+
     />
   );
 };
