@@ -8,14 +8,10 @@ interface iProps {
 const GameTrailer = ({ gameId }: iProps) => {
   const { data, error, isLoading } = useTrailers(gameId);
 
-  if (!data?.results || data.results.length === 0)
-    return <p>No trailers available for this game. 🎮</p>;
-
-  if (isLoading)
-    return (
-      <Spinner thickness="4px" speed="0.65s" emptyColor="gray.200" size="xl" />
-    );
+  if (isLoading) return null;
   if (error) throw error;
+
+  if (!data?.results || data.results.length === 0) return null;
 
   return (
     <video
