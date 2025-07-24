@@ -15,7 +15,7 @@ const GameDetailPage = () => {
   if (error || !game) throw error;
 
   return (
-    <Box marginTop={{base: '40px', md: '80px'}}>
+    <Box marginTop={{ base: '40px', md: '80px' }}>
       <SimpleGrid columns={{ base: 1, md: 2 }} gap={5}>
         <GridItem>
           <Heading marginBottom={5}>{game.name}</Heading>
